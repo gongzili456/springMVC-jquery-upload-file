@@ -7,30 +7,32 @@
 <title>Home</title>
 </head>
 <body>
-	<h1></h1>
+	<h1>welcome upload file</h1>
 
-	<P>The time on the server is ${serverTime}.</P>
-	<input type="button" value="submit" onclick="a()">
+	<input id="fileupload" type="file" name="files[]" data-url="upload"
+		multiple>
 
+
+	<form action="upload" method="post" enctype="multipart/form-data">
+		<input type="file" name="file"> <input type="submit"
+			value="submit">
+	</form>
 
 	<script src="resources/jquery-1.8.3.min.js"></script>
+	<script src="resources/bootstrap/js/bootstrap.min.js"></script>
+	<script src="resources/jquery-upload-file/jquery.ui.widget.js"></script>
+	<script src="resources/jquery-upload-file/jquery.iframe-transport.js"></script>
+	<script src="resources/jquery-upload-file/jquery.fileupload.js"></script>
+
 	<script type="text/javascript">
-		function a() {
-			var p = {
-				name : 'sansan',
-				age : 13
-			};
-			$.ajax({
-				type : 'POST',
-				url : 'users',
-				dataType : 'JSON',
-				contentType : 'application/json',
-				data : JSON.stringify(p),
-				success : function(data) {
-					console.log(data);
+		$(function() {
+			$('#fileupload').fileupload({
+				dataType : 'json',
+				done : function(e, data) {
+					console.log('data : ', data);
 				}
 			});
-		}
+		});
 	</script>
 
 </body>
