@@ -26,6 +26,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import cn.rest.domain.ImageFile;
 import cn.rest.service.ImageService;
+import cn.rest.utils.PropertyHelper;
 
 @Controller
 @RequestMapping("/upload")
@@ -34,13 +35,15 @@ public class UploadController {
 	@Autowired
 	ImageService imageService;
 
-	private String path = "D:/tpm/image";
+	private String path = PropertyHelper
+			.getProperties(PropertyHelper.UPLOAD_PROPERTIES);
 
 	private final char SEPARATORCHAR = File.separatorChar;
 
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseBody
 	public List<ImageFile> upload(MultipartHttpServletRequest request) {
+
 		List<ImageFile> list = new LinkedList<ImageFile>();
 
 		Iterator<String> names = request.getFileNames();
